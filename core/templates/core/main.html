@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Type It!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	{% load static %}
+
+	<link rel="stylesheet" type="text/css" href="{% static 'core/css/main.css' %}">
+
+	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet"> 
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script src="{% static 'core/js/main.js' %}"></script>
+</head>
+<body id="body">
+	<br>
+	<br>
+	<div class="container">
+		<div id="text-box" class="row box">
+			<div class="col-12">
+				<p id="text">{{ text }}</p>
+				<p>
+					<span id="text1"></span>
+					<span id="current_word"></span>
+					<span id="text2"></span>
+				</p>
+			</div>
+		</div>
+		<br>
+		<div id="main" class="row box">
+			<div class="col-12">
+				<p id="timer">00</p>
+				<p id="correct_words_per_minute">Type: <b id="to-type"></b></p>
+				<input type="text" name="text" id="input-field" placeholder="Timer starts when you begin typing..." autofocus autocomplete="off">
+				<br>
+				<br>
+				<button class="button" onclick="location.reload()">Reload</button>
+			</div>
+		</div>
+		<div id="results" class="row box">
+			<div class="col-12">
+				<h3 id="wpm"></h3>
+				<span id="save-score"><button class="button">Save Score</button><br><br></span>
+				<p id="result">Nothing here yet... Go type something!</p>
+				<p id="corrects"></p>
+				<p id="incorrects"></p>
+				<p id="typed"></p>
+			</div>
+		</div>
+		<div id="profile" class="row box">
+			<div class="col-12">
+				{% if user_auth == 'yes' %}
+					<p>Hi {{ user.first_name }}!</p>
+					<p>See your progress in the table below:</p>
+					<table class="table">
+						<tr>
+							<th>Date</th>
+							<th>Score</th>
+						</tr>
+						{% for row in stats reversed %}
+							<tr>
+								<td>{{ row.date }}</td>
+								<td>{{ row.score }}</td>
+							</tr>
+						{% endfor %}
+					</table>
+				{% else %}
+					<p>To save your score and see your progress, you need to be logged in.</p>
+					<p><b>Login with social media:</b></p>
+					<a href="{% url 'social:begin' 'twitter' %}" class="btn btn-info"><i class="fab fa-twitter"></i> Twitter</a>
+					<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary"><i class="fab fa-facebook-f"></i> Facebook</a>
+				{% endif %}
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div id="main-tab" class="col-4 section box"><b>Main</b></div>
+			<div id="results-tab" class="col-4 section box"><b>Results</b></div>
+			<div id="profile-tab" class="col-4 section box"><b>Profile</b></div>
+		</div>
+	</div>
+	<form id="score-form" method="post" action="/store_score">
+		{% csrf_token %}
+		<input id="score-input" type="hidden" name="score-input">
+	</form>
+	<p id="user-auth" hidden>{{ user_auth }}</p>
+</body>
+</html>

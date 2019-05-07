@@ -1,0 +1,76 @@
+#body {
+	background-color: #f5f5f5;
+	font-family: Arial;
+}
+
+.box {
+	background-color: #ffffff;
+	border: 1px solid grey;
+	-moz-box-shadow: 3px 3px 5px 6px #ccc;
+	-webkit-box-shadow: 3px 3px 5px 6px #ccc;
+	box-shadow: 0px 3px 5px #bfbdbd;
+	padding: 10px 0;
+}
+
+#results {
+	display: none;
+}
+
+#profile {
+	display: none;
+}
+
+.section {
+	text-align: center;
+	border: 1px solid #eae8e8;
+	margin-bottom: 6px;
+	cursor: pointer;
+}
+
+.section:hover {
+	background-color: #eae8e8;
+}
+
+#input-field {
+	background-color: #e1e9ee;
+	padding: 15px 10px;
+	border: none;
+	width: 70%;
+}
+
+.button {
+	padding: 5px;
+	border: 1px solid grey;
+	cursor: pointer;
+	box-shadow: 0px 2px 3px #bfbdbd;
+	background-color: #ffffff;
+}
+
+.button:hover {
+	background-color: #eae8e8;
+}
+
+#timer {
+	float: right;
+	font-family: 'Orbitron', sans-serif;
+	font-size: 25px;
+}
+
+.active {
+	border: 1px solid grey;
+	background-color: #e1e9ee;
+	transition: 1s;
+}
+
+#text-box {
+	max-height: 90px;
+	overflow: hidden;
+}
+
+#current_word {
+	background-color: #e1e9ee;
+}
+
+#text, #save-score {
+	display: none;
+}
